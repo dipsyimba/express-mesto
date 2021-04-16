@@ -54,6 +54,7 @@ const likeCard = (req, res, next) => {
     cardId,
     { $addToSet: { likes: userId } },
     { new: true },
+    { runValidators: true },
   )
     .orFail(new NotFoundError('Такая карточка отсутствует'))
     .then((addLike) => {
@@ -71,7 +72,12 @@ const dislikeCard = (req, res, next) => {
   const userId = req.user._id;
   const { cardId } = req.params;
 
-  Card.findByIdAndUpdate(cardId, { $pull: { likes: userId } }, { new: true })
+  Card.findByIdAndUpdate(
+    cardId,
+    { $pull: { likes: userId } },
+    { new: true },
+    { runValidators: true },
+  )
     .then((dislike) => {
       if (!dislike) {
         throw new NotFoundError('Такая карточка отсутствует');

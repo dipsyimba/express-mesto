@@ -7,6 +7,7 @@ const DatabaseError = require('../errors/databaseError');
 const IncorrectValueError = require('../errors/incorrectValueError');
 const AuthError = require('../errors/authError');
 const NotFoundError = require('../errors/notFoundError');
+const EmailError = require('../errors/emailError');
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -69,7 +70,7 @@ const createUser = (req, res, next) => {
           if (err.name === 'ValidationError') {
             next(new IncorrectValueError('Введены некорректные данные'));
           } else if (err.code === 11000) {
-            next(new IncorrectValueError('Пользователь с таким email уже существует'));
+            next(new EmailError('Пользователь с таким email уже существует'));
           }
           next(err);
         });
