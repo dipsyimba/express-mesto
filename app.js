@@ -11,7 +11,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
 
 const { PORT = 3000 } = process.env;
-// const corsWhiteList = ['http://mesto.world.nomoredomains.monster', 'https://mesto.world.nomoredomains.monster'];
+//  const corsWhiteList = ['http://mesto.world.nomoredomains.monster', 'https://mesto.world.nomoredomains.monster'];
 // const corsOptions = {
 //   origin: (origin, callback) => {
 //     if (corsWhiteList.indexOf(origin) !== -1) {
