@@ -11,15 +11,15 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
 
 const { PORT = 3000 } = process.env;
-const corsWhiteList = ['http://mesto.world.nomoredomains.monster', 'https://mesto.world.nomoredomains.monster', 'http://localhost:3000'];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (corsWhiteList.indexOf(origin) !== -1) {
-      callback(null, true);
-    }
-  },
-  credentials: true,
-};
+// const corsWhiteList = ['http://mesto.world.nomoredomains.monster', 'https://mesto.world.nomoredomains.monster'];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (corsWhiteList.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     }
+//   },
+//   credentials: true,
+// };
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -27,7 +27,6 @@ const limiter = rateLimit({
 });
 
 const app = express();
-app.set('trust proxy', 1);
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -39,7 +38,10 @@ app.use(helmet());
 app.use(limiter);
 app.use(bodyParser.json());
 app.use(requestLogger);
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: '*',
+  credentials: true,
+}));
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
