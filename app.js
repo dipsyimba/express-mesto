@@ -39,7 +39,7 @@ app.use(limiter);
 app.use(bodyParser.json());
 app.use(requestLogger);
 app.use(cors({
-  origin: '*',
+  origin: 'http://mesto.world.nomoredomains.monster',
   credentials: true,
 }));
 app.use(router);
