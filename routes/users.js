@@ -13,9 +13,9 @@ const {
 } = require('../middlewares/celebrate');
 
 router.get('/', getUsers);
-router.get('/:userId', getUserById);
 router.get('/me', getCurrentUser);
 router.patch('/me', updateUserValidation, updateUser);
 router.patch('/me/avatar', updateUserAvatarValidation, updateAvatar);
+router.get('/:userId', getUserById);
 
 module.exports = router;

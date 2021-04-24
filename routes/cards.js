@@ -15,8 +15,8 @@ const {
 } = require('../middlewares/celebrate');
 
 router.get('/', getCards);
-router.delete('/:cardId', deleteCardValidation, deleteCard);
 router.post('/', createCardValidation, createCard);
+router.delete('/:cardId', deleteCardValidation, deleteCard);
 router.put('/:cardId/likes', changeLikeValidation, likeCard);
 router.delete('/:cardId/likes', changeLikeValidation, dislikeCard);
 

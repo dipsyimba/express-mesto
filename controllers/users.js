@@ -174,6 +174,11 @@ function login(req, res, next) {
     });
 }
 
+function signOut(req, res, next) {
+  res.clearCookie('jwt').send({ message: 'cookie удалена' });
+  next();
+}
+
 module.exports = {
   getUsers,
   getUserById,
@@ -182,4 +187,5 @@ module.exports = {
   updateAvatar,
   getCurrentUser,
   login,
+  signOut,
 };

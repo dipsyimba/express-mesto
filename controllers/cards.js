@@ -54,7 +54,6 @@ const likeCard = (req, res, next) => {
     cardId,
     { $addToSet: { likes: userId } },
     { new: true },
-    { runValidators: true },
   )
     .orFail(new NotFoundError('Такая карточка отсутствует'))
     .then((addLike) => {
@@ -76,7 +75,6 @@ const dislikeCard = (req, res, next) => {
     cardId,
     { $pull: { likes: userId } },
     { new: true },
-    { runValidators: true },
   )
     .then((dislike) => {
       if (!dislike) {

@@ -9,6 +9,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
 
 const { PORT = 3000 } = process.env;
+const whiteList = ['http://mesto.world.nomoredomains.monster', 'https://mesto.world.nomoredomains.monster'];
 
 const app = express();
 
@@ -22,7 +23,11 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(requestLogger);
 app.use(cors({
-  origin: 'https://mesto.world.nomoredomains.monster',
+  origin: (origin, callback) => {
+    if (whiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    }
+  },
   credentials: true,
 }));
 app.use(router);
